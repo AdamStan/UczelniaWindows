@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UczelniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="Faculties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="faculty_name" Type="varchar" MaxLength="64" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mark_value" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="subject_id" Type="int" />
+          <Property Name="tutor_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="index_number" />
+          </Key>
+          <Property Name="index_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="s_name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="post_code" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="street" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="number" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="faculty_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Uczelnia.dbo.StudentToSubject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentToSubject">
+          <Key>
+            <PropertyRef Name="student_id" />
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="student_id" Type="int" Nullable="false" />
+          <Property Name="subject_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subject_name" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SubjectToTutors">
+          <Key>
+            <PropertyRef Name="subject_id" />
+            <PropertyRef Name="tutor_id" />
+          </Key>
+          <Property Name="subject_id" Type="int" Nullable="false" />
+          <Property Name="tutor_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tutors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t_name" Type="varchar" MaxLength="32" />
+          <Property Name="surname" Type="varchar" MaxLength="32" />
+          <Property Name="post_code" Type="char" MaxLength="8" />
+          <Property Name="street" Type="varchar" MaxLength="32" />
+          <Property Name="number" Type="char" MaxLength="5" />
+          <Property Name="username" Type="varchar" MaxLength="64" />
+          <Property Name="password" Type="varchar" MaxLength="64" />
+          <Property Name="faculty_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Uczelnia.dbo.MarksView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MarksView">
+          <Key>
+            <PropertyRef Name="index_number" />
+          </Key>
+          <Property Name="index_number" Type="int" Nullable="false" />
+          <Property Name="subject_name" Type="varchar" MaxLength="32" />
+          <Property Name="mark_value" Type="decimal" Precision="2" Scale="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Uczelnia.dbo.StudentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentsView">
+          <Key>
+            <PropertyRef Name="index_number" />
+            <PropertyRef Name="s_name" />
+            <PropertyRef Name="surname" />
+          </Key>
+          <Property Name="index_number" Type="int" Nullable="false" />
+          <Property Name="s_name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="faculty_name" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Uczelnia.dbo.TutorsView' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TutorsView">
+          <Property Name="faculty_name" Type="varchar" MaxLength="64" />
+          <Property Name="t_name" Type="varchar" MaxLength="32" />
+          <Property Name="surname" Type="varchar" MaxLength="32" />
+        </EntityType>-->
+        <Association Name="fk_fac_stud">
+          <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="faculty_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fac_tut">
+          <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
+          <End Role="Tutors" Type="Self.Tutors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tutors">
+              <PropertyRef Name="faculty_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_std_mk">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Marks" Type="Self.Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="index_number" />
+            </Principal>
+            <Dependent Role="Marks">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_stud">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="index_number" />
+            </Principal>
+            <Dependent Role="StudentToSubject">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sub">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="SubjectToTutors" Type="Self.SubjectToTutors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SubjectToTutors">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sub_mk">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Marks" Type="Self.Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Marks">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_subj">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StudentToSubject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tut">
+          <End Role="Tutors" Type="Self.Tutors" Multiplicity="1" />
+          <End Role="SubjectToTutors" Type="Self.SubjectToTutors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SubjectToTutors">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tut_mk">
+          <End Role="Tutors" Type="Self.Tutors" Multiplicity="0..1" />
+          <End Role="Marks" Type="Self.Marks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Marks">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UczelniaModelStoreContainer">
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tutors" EntityType="Self.Tutors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentToSubject" EntityType="Self.StudentToSubject" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentToSubject].[student_id] AS [student_id], 
+    [StudentToSubject].[subject_id] AS [subject_id]
+    FROM [dbo].[StudentToSubject] AS [StudentToSubject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SubjectToTutors" EntityType="Self.SubjectToTutors" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SubjectToTutors].[subject_id] AS [subject_id], 
+    [SubjectToTutors].[tutor_id] AS [tutor_id]
+    FROM [dbo].[SubjectToTutors] AS [SubjectToTutors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MarksView" EntityType="Self.MarksView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MarksView].[index_number] AS [index_number], 
+    [MarksView].[subject_name] AS [subject_name], 
+    [MarksView].[mark_value] AS [mark_value]
+    FROM [dbo].[MarksView] AS [MarksView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudentsView" EntityType="Self.StudentsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentsView].[index_number] AS [index_number], 
+    [StudentsView].[s_name] AS [s_name], 
+    [StudentsView].[surname] AS [surname], 
+    [StudentsView].[faculty_name] AS [faculty_name]
+    FROM [dbo].[StudentsView] AS [StudentsView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fac_tut" Association="Self.fk_fac_tut">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Tutors" EntitySet="Tutors" />
+          </AssociationSet>
+          <AssociationSet Name="fk_std_mk" Association="Self.fk_std_mk">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Marks" EntitySet="Marks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_stud" Association="Self.fk_stud">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentToSubject" EntitySet="StudentToSubject" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sub" Association="Self.fk_sub">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="SubjectToTutors" EntitySet="SubjectToTutors" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sub_mk" Association="Self.fk_sub_mk">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Marks" EntitySet="Marks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_subj" Association="Self.fk_subj">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="StudentToSubject" EntitySet="StudentToSubject" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tut" Association="Self.fk_tut">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="SubjectToTutors" EntitySet="SubjectToTutors" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tut_mk" Association="Self.fk_tut_mk">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="Marks" EntitySet="Marks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UczelniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="faculty_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_fac_stud" FromRole="Faculties" ToRole="Students" />
+          <NavigationProperty Name="Tutors" Relationship="Self.fk_fac_tut" FromRole="Faculties" ToRole="Tutors" />
+        </EntityType>
+        <EntityType Name="Mark">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mark_value" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="subject_id" Type="Int32" />
+          <Property Name="tutor_id" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.fk_std_mk" FromRole="Marks" ToRole="Students" />
+          <NavigationProperty Name="Subject" Relationship="Self.fk_sub_mk" FromRole="Marks" ToRole="Subjects" />
+          <NavigationProperty Name="Tutor" Relationship="Self.fk_tut_mk" FromRole="Marks" ToRole="Tutors" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="index_number" />
+          </Key>
+          <Property Name="index_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="s_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="post_code" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="faculty_id" Type="Int32" />
+          <NavigationProperty Name="Faculty" Relationship="Self.fk_fac_stud" FromRole="Students" ToRole="Faculties" />
+          <NavigationProperty Name="Marks" Relationship="Self.fk_std_mk" FromRole="Students" ToRole="Marks" />
+          <NavigationProperty Name="Subjects" Relationship="Self.StudentToSubject" FromRole="Students" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subject_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Marks" Relationship="Self.fk_sub_mk" FromRole="Subjects" ToRole="Marks" />
+          <NavigationProperty Name="Students" Relationship="Self.StudentToSubject" FromRole="Subjects" ToRole="Students" />
+          <NavigationProperty Name="Tutors" Relationship="Self.SubjectToTutors" FromRole="Subjects" ToRole="Tutors" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="post_code" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="faculty_id" Type="Int32" />
+          <NavigationProperty Name="Faculty" Relationship="Self.fk_fac_tut" FromRole="Tutors" ToRole="Faculties" />
+          <NavigationProperty Name="Marks" Relationship="Self.fk_tut_mk" FromRole="Tutors" ToRole="Marks" />
+          <NavigationProperty Name="Subjects" Relationship="Self.SubjectToTutors" FromRole="Tutors" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="MarksView">
+          <Key>
+            <PropertyRef Name="index_number" />
+          </Key>
+          <Property Name="index_number" Type="Int32" Nullable="false" />
+          <Property Name="subject_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="mark_value" Type="Decimal" Precision="2" Scale="1" />
+        </EntityType>
+        <EntityType Name="StudentsView">
+          <Key>
+            <PropertyRef Name="index_number" />
+            <PropertyRef Name="s_name" />
+            <PropertyRef Name="surname" />
+          </Key>
+          <Property Name="index_number" Type="Int32" Nullable="false" />
+          <Property Name="s_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="faculty_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_fac_stud">
+          <End Role="Faculties" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="faculty_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fac_tut">
+          <End Role="Faculties" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Tutors" Type="Self.Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tutors">
+              <PropertyRef Name="faculty_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_std_mk">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Marks" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="index_number" />
+            </Principal>
+            <Dependent Role="Marks">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sub_mk">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Marks" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Marks">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tut_mk">
+          <End Role="Tutors" Type="Self.Tutor" Multiplicity="0..1" />
+          <End Role="Marks" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Marks">
+              <PropertyRef Name="tutor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentToSubject">
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+        </Association>
+        <Association Name="SubjectToTutors">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+          <End Role="Tutors" Type="Self.Tutor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="UczelniaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Marks" EntityType="Self.Mark" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tutors" EntityType="Self.Tutor" />
+          <EntitySet Name="MarksViews" EntityType="Self.MarksView" />
+          <EntitySet Name="StudentsViews" EntityType="Self.StudentsView" />
+          <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fac_tut" Association="Self.fk_fac_tut">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Tutors" EntitySet="Tutors" />
+          </AssociationSet>
+          <AssociationSet Name="fk_std_mk" Association="Self.fk_std_mk">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Marks" EntitySet="Marks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sub_mk" Association="Self.fk_sub_mk">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Marks" EntitySet="Marks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tut_mk" Association="Self.fk_tut_mk">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="Marks" EntitySet="Marks" />
+          </AssociationSet>
+          <AssociationSet Name="StudentToSubject" Association="Self.StudentToSubject">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="SubjectToTutors" Association="Self.SubjectToTutors">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Tutors" EntitySet="Tutors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UczelniaModelStoreContainer" CdmEntityContainer="UczelniaEntities">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="UczelniaModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrators">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="UczelniaModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculties">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="faculty_name" ColumnName="faculty_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marks">
+            <EntityTypeMapping TypeName="UczelniaModel.Mark">
+              <MappingFragment StoreEntitySet="Marks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="mark_value" ColumnName="mark_value" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="tutor_id" ColumnName="tutor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="UczelniaModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="index_number" ColumnName="index_number" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="s_name" ColumnName="s_name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="post_code" ColumnName="post_code" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="faculty_id" ColumnName="faculty_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="UczelniaModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="UczelniaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tutors">
+            <EntityTypeMapping TypeName="UczelniaModel.Tutor">
+              <MappingFragment StoreEntitySet="Tutors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="t_name" ColumnName="t_name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="post_code" ColumnName="post_code" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="faculty_id" ColumnName="faculty_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarksViews">
+            <EntityTypeMapping TypeName="UczelniaModel.MarksView">
+              <MappingFragment StoreEntitySet="MarksView">
+                <ScalarProperty Name="index_number" ColumnName="index_number" />
+                <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+                <ScalarProperty Name="mark_value" ColumnName="mark_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsViews">
+            <EntityTypeMapping TypeName="UczelniaModel.StudentsView">
+              <MappingFragment StoreEntitySet="StudentsView">
+                <ScalarProperty Name="index_number" ColumnName="index_number" />
+                <ScalarProperty Name="s_name" ColumnName="s_name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="faculty_name" ColumnName="faculty_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StudentToSubject" TypeName="UczelniaModel.StudentToSubject" StoreEntitySet="StudentToSubject">
+            <EndProperty Name="Students">
+              <ScalarProperty Name="index_number" ColumnName="student_id" />
+            </EndProperty>
+            <EndProperty Name="Subjects">
+              <ScalarProperty Name="id" ColumnName="subject_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SubjectToTutors" TypeName="UczelniaModel.SubjectToTutors" StoreEntitySet="SubjectToTutors">
+            <EndProperty Name="Subjects">
+              <ScalarProperty Name="id" ColumnName="subject_id" />
+            </EndProperty>
+            <EndProperty Name="Tutors">
+              <ScalarProperty Name="id" ColumnName="tutor_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

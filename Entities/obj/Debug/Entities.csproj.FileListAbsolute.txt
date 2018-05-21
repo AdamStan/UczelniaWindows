@@ -1,0 +1,10 @@
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\Entities.exe.config
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\Entities.exe
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\Entities.pdb
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\EntityFramework.dll
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\EntityFramework.xml
+D:\Projekty\C#\UczelniaWindows\Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projekty\C#\UczelniaWindows\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
+D:\Projekty\C#\UczelniaWindows\Entities\obj\Debug\Entities.exe
+D:\Projekty\C#\UczelniaWindows\Entities\obj\Debug\Entities.pdb

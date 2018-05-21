@@ -1,0 +1,10 @@
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\UczelniaWindows.exe.config
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\UczelniaWindows.exe
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\UczelniaWindows.pdb
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csprojResolveAssemblyReference.cache
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.LoginWindow.resources
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.Properties.Resources.resources
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csproj.GenerateResource.Cache
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.exe
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.pdb
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.StudentWindow.resources
