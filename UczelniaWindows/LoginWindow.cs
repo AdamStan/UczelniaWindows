@@ -30,24 +30,50 @@ namespace UczelniaWindows
             UsernameTextBox.Text = "";
             PasswordTextBox.Text = "";
 
-            if (username.Equals("student"))
-            {
-                this.Hide();
-                new StudentWindow(this, 1).Show();
+            Connection c = new Connection("Data Source=ASUS\\SQL_SERVER;" +
+                "Initial Catalog=Uczelnia;Integrated Security=True");
+
+            if (comboBox1.Text.Equals("student"))
+            { 
+                int index;
+                int.TryParse(username, out index);
+                if (c.IsItStudent(index, password))
+                {
+                    this.Hide();
+                    new StudentWindow(this, index).Show();
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zalogować");
+                }
             }
-            else if (username.Equals("tutor"))
+            else if (comboBox1.Text.Equals("tutor"))
             {
-                this.Hide();
-                new TutorWindow(this).Show();
+                if (c.IsItTutorOrAdm(username, password, "tutors"))
+                {
+                    this.Hide();
+                    new TutorWindow(this).Show();
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zalogować");
+                }
             }
-            else if (username.Equals("administrator"))
+            else if (comboBox1.Text.Equals("administrator"))
             {
-                this.Hide();
-                new AdminWindow(this).Show();
+                if (c.IsItTutorOrAdm(username, password, "administrators"))
+                {
+                    this.Hide();
+                    new AdminWindow(this).Show();
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zalogować");
+                }
             }
             else
             {
-                MessageBox.Show("Nie udało się zalogować");
+                MessageBox.Show("Nie wybrano nic w combo");
             }
         }
     }

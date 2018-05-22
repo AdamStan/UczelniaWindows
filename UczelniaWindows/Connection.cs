@@ -17,17 +17,45 @@ namespace UczelniaWindows
             this.con = new SqlConnection(url);
         }
 
-        public bool IsItStudent()
+        public bool IsItStudent(int index, String password)
         {
-            throw new NotImplementedException();
+            con.Open();
+            String command = "select * from students where index_number = " 
+                + index + " AND password = '" + password + "';";
+            SqlDataAdapter adapter = new SqlDataAdapter(command, con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            bool variable = false;
+            foreach(DataRow r in dt.Rows)
+            {
+                /*foreach(DataColumn c in dt.Columns)
+                {
+                    Console.Write(" " + r[c]);
+                }*/
+                variable = true;
+            }
+            con.Close();
+            return variable;
         }
-        public bool IsItTutor()
+        public bool IsItTutorOrAdm(string username, string password, string tablename)
         {
-            throw new NotImplementedException();
-        }
-        public bool IsItAdministrator()
-        {
-            throw new NotImplementedException();
+            con.Open();
+            String command = "select * from " + tablename + " where username = '"
+                + username + "' AND password = '" + password + "';";
+            SqlDataAdapter adapter = new SqlDataAdapter(command, con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            bool variable = false;
+            foreach (DataRow r in dt.Rows)
+            {
+                /*foreach(DataColumn c in dt.Columns)
+                {
+                    Console.Write(" " + r[c]);
+                }*/
+                variable = true;
+            }
+            con.Close();
+            return variable;
         }
     }
 }
