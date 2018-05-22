@@ -41,19 +41,19 @@
             // UsernameTextBox
             // 
             this.UsernameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UsernameTextBox.Location = new System.Drawing.Point(145, 18);
+            this.UsernameTextBox.Location = new System.Drawing.Point(145, 53);
             this.UsernameTextBox.Name = "UsernameTextBox";
-            this.UsernameTextBox.Size = new System.Drawing.Size(121, 20);
+            this.UsernameTextBox.Size = new System.Drawing.Size(116, 20);
             this.UsernameTextBox.TabIndex = 0;
             this.UsernameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(18, 92);
+            this.label2.Location = new System.Drawing.Point(23, 103);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(5);
-            this.label2.Size = new System.Drawing.Size(121, 77);
+            this.label2.Size = new System.Drawing.Size(116, 53);
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -61,19 +61,19 @@
             // PasswordTextBox
             // 
             this.PasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PasswordTextBox.Location = new System.Drawing.Point(145, 95);
+            this.PasswordTextBox.Location = new System.Drawing.Point(145, 106);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
-            this.PasswordTextBox.Size = new System.Drawing.Size(121, 20);
+            this.PasswordTextBox.Size = new System.Drawing.Size(116, 20);
             this.PasswordTextBox.TabIndex = 1;
             this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ExitButton
             // 
             this.ExitButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ExitButton.Location = new System.Drawing.Point(145, 220);
+            this.ExitButton.Location = new System.Drawing.Point(145, 185);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(121, 23);
+            this.ExitButton.Size = new System.Drawing.Size(116, 23);
             this.ExitButton.TabIndex = 2;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // 
             this.LoginButton.AutoSize = true;
             this.LoginButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.LoginButton.Location = new System.Drawing.Point(18, 220);
+            this.LoginButton.Location = new System.Drawing.Point(23, 185);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(121, 23);
+            this.LoginButton.Size = new System.Drawing.Size(116, 23);
             this.LoginButton.TabIndex = 3;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             this.MainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainContainer.Location = new System.Drawing.Point(0, 0);
             this.MainContainer.Name = "MainContainer";
-            this.MainContainer.Padding = new System.Windows.Forms.Padding(15);
+            this.MainContainer.Padding = new System.Windows.Forms.Padding(20, 50, 20, 50);
             this.MainContainer.RowCount = 3;
             this.MainContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.MainContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -117,10 +117,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(18, 15);
+            this.label1.Location = new System.Drawing.Point(23, 50);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(5);
-            this.label1.Size = new System.Drawing.Size(121, 77);
+            this.label1.Size = new System.Drawing.Size(116, 53);
             this.label1.TabIndex = 4;
             this.label1.Text = "Username";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;

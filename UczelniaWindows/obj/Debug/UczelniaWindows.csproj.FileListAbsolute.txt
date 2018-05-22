@@ -8,3 +8,5 @@ D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csproj.
 D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.exe
 D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.pdb
 D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.StudentWindow.resources
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.TutorWindow.resources
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.AdminWindow.resources

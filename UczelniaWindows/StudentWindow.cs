@@ -12,9 +12,13 @@ namespace UczelniaWindows
 {
     public partial class StudentWindow : Form
     {
-        public StudentWindow()
+        private Form formBehind;
+
+        public StudentWindow(Form behind, int i)
         {
             InitializeComponent();
+            this.formBehind = behind;
+            this.UsernameLabel.Text = i.ToString();
         }
 
         private void ShowMarks(object sender, EventArgs e)
@@ -29,7 +33,18 @@ namespace UczelniaWindows
 
         private void Wyloguj(object sender, EventArgs e)
         {
+            this.formBehind.Show();
             this.Close();
+        }
+
+        private void StudentWindow_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void FormToClose(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

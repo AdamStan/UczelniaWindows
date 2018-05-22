@@ -12,9 +12,18 @@ namespace UczelniaWindows
 {
     public partial class AdminWindow : Form
     {
-        public AdminWindow()
+        private Form formBehind;
+
+        public AdminWindow(Form behind)
         {
+            this.formBehind = behind;
             InitializeComponent();
+        }
+
+        private void Logout(object sender, EventArgs e)
+        {
+            this.formBehind.Show();
+            this.Close();
         }
     }
 }

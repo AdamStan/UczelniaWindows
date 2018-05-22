@@ -27,11 +27,27 @@ namespace UczelniaWindows
             string username = UsernameTextBox.Text;
             string password = PasswordTextBox.Text;
 
+            UsernameTextBox.Text = "";
+            PasswordTextBox.Text = "";
+
             if (username.Equals("student"))
             {
-                Console.WriteLine("DZIALA");
                 this.Hide();
-                new StudentWindow().Show();
+                new StudentWindow(this, 1).Show();
+            }
+            else if (username.Equals("tutor"))
+            {
+                this.Hide();
+                new TutorWindow(this).Show();
+            }
+            else if (username.Equals("administrator"))
+            {
+                this.Hide();
+                new AdminWindow(this).Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się zalogować");
             }
         }
     }

@@ -12,9 +12,18 @@ namespace UczelniaWindows
 {
     public partial class TutorWindow : Form
     {
-        public TutorWindow()
+        private Form formBehind;
+
+        public TutorWindow(Form behind)
         {
             InitializeComponent();
+            this.formBehind = behind;
+        }
+
+        private void Logout(object sender, EventArgs e)
+        {
+            this.formBehind.Show();
+            this.Close();
         }
     }
 }
