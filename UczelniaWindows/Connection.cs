@@ -28,10 +28,6 @@ namespace UczelniaWindows
             bool variable = false;
             foreach(DataRow r in dt.Rows)
             {
-                /*foreach(DataColumn c in dt.Columns)
-                {
-                    Console.Write(" " + r[c]);
-                }*/
                 variable = true;
             }
             con.Close();
@@ -48,14 +44,36 @@ namespace UczelniaWindows
             bool variable = false;
             foreach (DataRow r in dt.Rows)
             {
-                /*foreach(DataColumn c in dt.Columns)
-                {
-                    Console.Write(" " + r[c]);
-                }*/
                 variable = true;
             }
             con.Close();
             return variable;
         }
+        public DataTable SelectTable(String tablename)
+        {
+            con.Open();
+            String command = "select * from " + tablename;
+            SqlDataAdapter adapter = new SqlDataAdapter(command, con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            con.Close();
+            return dt;
+        }
+        //functions for student
+        #region
+        public DataTable SelectMarksForStudent(int index)
+        {
+            con.Open();
+            con.Close();
+            throw new NotImplementedException();
+        }
+        public DataTable SelectSubjectsForStudent(int index)
+        {
+            con.Open();
+            con.Close();
+            throw new NotImplementedException();
+        }
+    #endregion 
+        
     }
 }

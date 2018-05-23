@@ -87,6 +87,11 @@
     <Compile Include="TutorWindow.Designer.cs">
       <DependentUpon>TutorWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UczelniaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UczelniaDataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdminWindow.resx">
       <DependentUpon>AdminWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +122,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="UczelniaDataSet.xsc">
+      <DependentUpon>UczelniaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="UczelniaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UczelniaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="UczelniaDataSet.xss">
+      <DependentUpon>UczelniaDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
