@@ -10,3 +10,7 @@ D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.pdb
 D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.StudentWindow.resources
 D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.TutorWindow.resources
 D:\Projekty\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.AdminWindow.resources
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.dll
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.xml
+D:\Projekty\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.SqlServer.xml

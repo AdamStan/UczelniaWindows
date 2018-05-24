@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UczelniaModelStoreContainer" CdmEntityContainer="UczelniaEntities">
+    <EntitySetMapping Name="Administrators">
+      <EntityTypeMapping TypeName="UczelniaModel.Administrator">
+        <MappingFragment StoreEntitySet="Administrators">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="UczelniaModel.Faculty">
+        <MappingFragment StoreEntitySet="Faculties">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="faculty_name" ColumnName="faculty_name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marks">
+      <EntityTypeMapping TypeName="UczelniaModel.Mark">
+        <MappingFragment StoreEntitySet="Marks">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="mark_value" ColumnName="mark_value" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="UczelniaModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="index_number" ColumnName="index_number" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="s_name" ColumnName="s_name" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="field_of_study" ColumnName="field_of_study" />
+          <ScalarProperty Name="degree" ColumnName="degree" />
+          <ScalarProperty Name="mode" ColumnName="mode" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="faculty_id" ColumnName="faculty_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentToSubjects">
+      <EntityTypeMapping TypeName="UczelniaModel.StudentToSubject">
+        <MappingFragment StoreEntitySet="StudentToSubject">
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="UczelniaModel.Subject">
+        <MappingFragment StoreEntitySet="Subjects">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="UczelniaModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tutors">
+      <EntityTypeMapping TypeName="UczelniaModel.Tutor">
+        <MappingFragment StoreEntitySet="Tutors">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="t_name" ColumnName="t_name" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="institute" ColumnName="institute" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="faculty_id" ColumnName="faculty_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SubjectToTutors" TypeName="UczelniaModel.SubjectToTutors" StoreEntitySet="SubjectToTutors">
+      <EndProperty Name="Subjects">
+        <ScalarProperty Name="id" ColumnName="subject_id" />
+      </EndProperty>
+      <EndProperty Name="Tutors">
+        <ScalarProperty Name="id" ColumnName="tutor_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

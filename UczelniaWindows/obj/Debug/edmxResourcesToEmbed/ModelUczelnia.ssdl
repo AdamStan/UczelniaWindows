@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UczelniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Administrators">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="Faculties">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="faculty_name" Type="varchar" MaxLength="64" />
+    <Property Name="description" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Marks">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mark_value" Type="decimal" Precision="2" Scale="1" />
+    <Property Name="student_id" Type="int" />
+    <Property Name="subject_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="index_number" />
+    </Key>
+    <Property Name="index_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="s_name" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="surname" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="field_of_study" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="degree" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="mode" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="semester" Type="int" Nullable="false" />
+    <Property Name="faculty_id" Type="int" />
+  </EntityType>
+  <EntityType Name="StudentToSubject">
+    <Key>
+      <PropertyRef Name="student_id" />
+      <PropertyRef Name="subject_id" />
+    </Key>
+    <Property Name="student_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_name" Type="varchar" MaxLength="32" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SubjectToTutors">
+    <Key>
+      <PropertyRef Name="subject_id" />
+      <PropertyRef Name="tutor_id" />
+    </Key>
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="tutor_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tutors">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="t_name" Type="varchar" MaxLength="32" />
+    <Property Name="surname" Type="varchar" MaxLength="32" />
+    <Property Name="institute" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="varchar" MaxLength="64" />
+    <Property Name="password" Type="varchar" MaxLength="64" />
+    <Property Name="faculty_id" Type="int" />
+  </EntityType>
+  <Association Name="fk_fac_stud">
+    <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="faculty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fac_tut">
+    <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
+    <End Role="Tutors" Type="Self.Tutors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tutors">
+        <PropertyRef Name="faculty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_std_sub_mk">
+    <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="0..1" />
+    <End Role="Marks" Type="Self.Marks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentToSubject">
+        <PropertyRef Name="student_id" />
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="Marks">
+        <PropertyRef Name="student_id" />
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_stud">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="index_number" />
+      </Principal>
+      <Dependent Role="StudentToSubject">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sub">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="SubjectToTutors" Type="Self.SubjectToTutors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SubjectToTutors">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_subj">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StudentToSubject">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tut">
+    <End Role="Tutors" Type="Self.Tutors" Multiplicity="1" />
+    <End Role="SubjectToTutors" Type="Self.SubjectToTutors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tutors">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SubjectToTutors">
+        <PropertyRef Name="tutor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UczelniaModelStoreContainer">
+    <EntitySet Name="Administrators" EntityType="Self.Administrators" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentToSubject" EntityType="Self.StudentToSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tutors" EntityType="Self.Tutors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubjectToTutors" EntityType="Self.SubjectToTutors" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SubjectToTutors].[subject_id] AS [subject_id], 
+    [SubjectToTutors].[tutor_id] AS [tutor_id]
+    FROM [dbo].[SubjectToTutors] AS [SubjectToTutors]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fac_tut" Association="Self.fk_fac_tut">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Tutors" EntitySet="Tutors" />
+    </AssociationSet>
+    <AssociationSet Name="fk_std_sub_mk" Association="Self.fk_std_sub_mk">
+      <End Role="StudentToSubject" EntitySet="StudentToSubject" />
+      <End Role="Marks" EntitySet="Marks" />
+    </AssociationSet>
+    <AssociationSet Name="fk_stud" Association="Self.fk_stud">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentToSubject" EntitySet="StudentToSubject" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sub" Association="Self.fk_sub">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="SubjectToTutors" EntitySet="SubjectToTutors" />
+    </AssociationSet>
+    <AssociationSet Name="fk_subj" Association="Self.fk_subj">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="StudentToSubject" EntitySet="StudentToSubject" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tut" Association="Self.fk_tut">
+      <End Role="Tutors" EntitySet="Tutors" />
+      <End Role="SubjectToTutors" EntitySet="SubjectToTutors" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

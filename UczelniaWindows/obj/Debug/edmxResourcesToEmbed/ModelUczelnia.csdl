@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UczelniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="faculty_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Students" Relationship="Self.fk_fac_stud" FromRole="Faculties" ToRole="Students" />
+    <NavigationProperty Name="Tutors" Relationship="Self.fk_fac_tut" FromRole="Faculties" ToRole="Tutors" />
+  </EntityType>
+  <EntityType Name="Mark">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mark_value" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="student_id" Type="Int32" />
+    <Property Name="subject_id" Type="Int32" />
+    <NavigationProperty Name="StudentToSubject" Relationship="Self.fk_std_sub_mk" FromRole="Marks" ToRole="StudentToSubject" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="index_number" />
+    </Key>
+    <Property Name="index_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="s_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="field_of_study" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="degree" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mode" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="semester" Type="Int32" Nullable="false" />
+    <Property Name="faculty_id" Type="Int32" />
+    <NavigationProperty Name="Faculty" Relationship="Self.fk_fac_stud" FromRole="Students" ToRole="Faculties" />
+    <NavigationProperty Name="StudentToSubjects" Relationship="Self.fk_stud" FromRole="Students" ToRole="StudentToSubject" />
+  </EntityType>
+  <EntityType Name="StudentToSubject">
+    <Key>
+      <PropertyRef Name="student_id" />
+      <PropertyRef Name="subject_id" />
+    </Key>
+    <Property Name="student_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Marks" Relationship="Self.fk_std_sub_mk" FromRole="StudentToSubject" ToRole="Marks" />
+    <NavigationProperty Name="Student" Relationship="Self.fk_stud" FromRole="StudentToSubject" ToRole="Students" />
+    <NavigationProperty Name="Subject" Relationship="Self.fk_subj" FromRole="StudentToSubject" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="StudentToSubjects" Relationship="Self.fk_subj" FromRole="Subjects" ToRole="StudentToSubject" />
+    <NavigationProperty Name="Tutors" Relationship="Self.SubjectToTutors" FromRole="Subjects" ToRole="Tutors" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tutor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="t_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="institute" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="faculty_id" Type="Int32" />
+    <NavigationProperty Name="Faculty" Relationship="Self.fk_fac_tut" FromRole="Tutors" ToRole="Faculties" />
+    <NavigationProperty Name="Subjects" Relationship="Self.SubjectToTutors" FromRole="Tutors" ToRole="Subjects" />
+  </EntityType>
+  <Association Name="fk_fac_stud">
+    <End Role="Faculties" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="faculty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fac_tut">
+    <End Role="Faculties" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="Tutors" Type="Self.Tutor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tutors">
+        <PropertyRef Name="faculty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_std_sub_mk">
+    <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="0..1" />
+    <End Role="Marks" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentToSubject">
+        <PropertyRef Name="student_id" />
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="Marks">
+        <PropertyRef Name="student_id" />
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_stud">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="index_number" />
+      </Principal>
+      <Dependent Role="StudentToSubject">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_subj">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+    <End Role="StudentToSubject" Type="Self.StudentToSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StudentToSubject">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubjectToTutors">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+    <End Role="Tutors" Type="Self.Tutor" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="UczelniaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+    <EntitySet Name="Marks" EntityType="Self.Mark" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentToSubjects" EntityType="Self.StudentToSubject" />
+    <EntitySet Name="Subjects" EntityType="Self.Subject" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tutors" EntityType="Self.Tutor" />
+    <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fac_tut" Association="Self.fk_fac_tut">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Tutors" EntitySet="Tutors" />
+    </AssociationSet>
+    <AssociationSet Name="fk_std_sub_mk" Association="Self.fk_std_sub_mk">
+      <End Role="StudentToSubject" EntitySet="StudentToSubjects" />
+      <End Role="Marks" EntitySet="Marks" />
+    </AssociationSet>
+    <AssociationSet Name="fk_stud" Association="Self.fk_stud">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentToSubject" EntitySet="StudentToSubjects" />
+    </AssociationSet>
+    <AssociationSet Name="fk_subj" Association="Self.fk_subj">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="StudentToSubject" EntitySet="StudentToSubjects" />
+    </AssociationSet>
+    <AssociationSet Name="SubjectToTutors" Association="Self.SubjectToTutors">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Tutors" EntitySet="Tutors" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

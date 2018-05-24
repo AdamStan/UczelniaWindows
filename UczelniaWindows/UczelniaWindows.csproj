@@ -47,8 +47,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrator.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,30 +79,61 @@
       <DependentUpon>AdminWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="Faculty.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mark.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelUczelnia.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelUczelnia.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelUczelnia.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelUczelnia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelUczelnia.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudentToSubject.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
     <Compile Include="StudentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StudentWindow.Designer.cs">
       <DependentUpon>StudentWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subject.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tutor.cs">
+      <DependentUpon>ModelUczelnia.tt</DependentUpon>
+    </Compile>
     <Compile Include="TutorWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TutorWindow.Designer.cs">
       <DependentUpon>TutorWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UczelniaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UczelniaDataSet.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdminWindow.resx">
       <DependentUpon>AdminWindow.cs</DependentUpon>
@@ -113,6 +156,14 @@
     <EmbeddedResource Include="TutorWindow.resx">
       <DependentUpon>TutorWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="ModelUczelnia.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelUczelnia.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelUczelnia.edmx.diagram">
+      <DependentUpon>ModelUczelnia.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,17 +173,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="UczelniaDataSet.xsc">
-      <DependentUpon>UczelniaDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="UczelniaDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>UczelniaDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="UczelniaDataSet.xss">
-      <DependentUpon>UczelniaDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -148,6 +188,21 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelUczelnia.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelUczelnia.Context.cs</LastGenOutput>
+      <DependentUpon>ModelUczelnia.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelUczelnia.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelUczelnia.edmx</DependentUpon>
+      <LastGenOutput>ModelUczelnia.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
