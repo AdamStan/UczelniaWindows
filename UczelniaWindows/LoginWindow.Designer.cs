@@ -33,9 +33,9 @@
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
             this.MainContainer = new System.Windows.Forms.TableLayoutPanel();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.ExitButton = new System.Windows.Forms.Button();
             this.MainContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +105,17 @@
             this.MainContainer.Size = new System.Drawing.Size(284, 261);
             this.MainContainer.TabIndex = 4;
             // 
+            // ExitButton
+            // 
+            this.ExitButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ExitButton.Location = new System.Drawing.Point(23, 195);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(116, 23);
+            this.ExitButton.TabIndex = 6;
+            this.ExitButton.Text = "Exit";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitProgram);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -129,17 +140,6 @@
             this.comboBox1.Size = new System.Drawing.Size(116, 21);
             this.comboBox1.TabIndex = 5;
             this.comboBox1.Text = "Wybierz role z listy";
-            // 
-            // ExitButton
-            // 
-            this.ExitButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ExitButton.Location = new System.Drawing.Point(23, 195);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(116, 23);
-            this.ExitButton.TabIndex = 6;
-            this.ExitButton.Text = "Exit";
-            this.ExitButton.UseVisualStyleBackColor = true;
-            this.ExitButton.Click += new System.EventHandler(this.ExitProgram);
             // 
             // LoginWindow
             // 

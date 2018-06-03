@@ -1,13 +1,6 @@
 USE Uczelnia;
 
-CREATE TABLE SubjectToTutors(
-	subject_id INTEGER NOT NULL,
-	tutor_id INTEGER NOT NULL
-);
-ALTER TABLE SubjectToTutors
-	ADD CONSTRAINT fk_sub FOREIGN KEY (subject_id) REFERENCES Subjects(id),
-		CONSTRAINT fk_tut FOREIGN KEY (tutor_id) REFERENCES Tutors(id)
-	;
+
 ALTER TABLE Administrators
 	ADD CONSTRAINT pk_adm PRIMARY KEY (id),
 		CONSTrAiNT unique_username UNIQUE (username);
@@ -23,7 +16,6 @@ ALTER TABLE Students
 		faculty_id INTEGER,
 		CONSTRAINT fk_fac_stud FOREIGN KEY (faculty_id) REFERENCES Faculties(id)
 	;
-
 ALTER TABLE Tutors
 	ADD CONSTRAINT pk_tut PRIMARY KEY (id),
 		faculty_id INTEGER,
@@ -31,6 +23,14 @@ ALTER TABLE Tutors
 		CONSTRAINT unique_login UNIQUE (username)
 	;
 
+CREATE TABLE SubjectToTutors(
+	subject_id INTEGER NOT NULL,
+	tutor_id INTEGER NOT NULL
+);
+ALTER TABLE SubjectToTutors
+	ADD CONSTRAINT fk_sub FOREIGN KEY (subject_id) REFERENCES Subjects(id),
+		CONSTRAINT fk_tut FOREIGN KEY (tutor_id) REFERENCES Tutors(id)
+	;
 CREATE TABLE StudentToSubject (
 	student_id INTEGER NOT NULL,
 	subject_id INTEGER NOT NULL

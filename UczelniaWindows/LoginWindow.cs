@@ -30,7 +30,7 @@ namespace UczelniaWindows
             UsernameTextBox.Text = "";
             PasswordTextBox.Text = "";
 
-            Connection c = new Connection("Data Source=ASUS\\SQL_SERVER;" +
+            Connection c = new Connection("Data Source=DESKTOP-8G4C4MF;" +
                 "Initial Catalog=Uczelnia;Integrated Security=True");
 
             if (comboBox1.Text.Equals("student"))
@@ -52,7 +52,7 @@ namespace UczelniaWindows
                 if (c.IsItTutorOrAdm(username, password, "tutors"))
                 {
                     this.Hide();
-                    new TutorWindow(this).Show();
+                    new TutorWindow(this, username).Show();
                 }
                 else
                 {
