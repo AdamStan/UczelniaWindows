@@ -15,7 +15,7 @@ insert into Faculties values ('WEEIA','Wydzia³ Elektrotechniki, Elektroniki, Inf
 insert into Faculties values ('WCH','Wydzia³ Chemiczny')
 insert into Faculties values ('WTMiWT','Wydzia³ Technologii Materia³owych i Wzornictwa Tekstyliów')
 insert into Faculties values ('WBiNo¯','Wydzia³ Biotechnologii i Nauk o ¯ywnoœci')
-insert into Faculties values('WBAiIŒ','Wydzia³ Budownictwa, Architektoru i In¿ynierii Œrodowiska')
+insert into Faculties values ('WBAiIŒ','Wydzia³ Budownictwa, Architektoru i In¿ynierii Œrodowiska')
 insert into Faculties values ('WFTIMS','Wydzia³ Fizyki Technicznej, Informatyki i Matematyki Stosowanej')
 insert into Faculties values ('WZiIP','Wydzia³ Zarzadzania i In¿ynierii Produkcji')
 insert into Faculties values ('WIPiOŒ','Wydzia³ In¿ynierii Procesowej i Ochrony Œrodowiska')
