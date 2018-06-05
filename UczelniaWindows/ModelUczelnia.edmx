@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UczelniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UczelniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrators">
           <Key>
             <PropertyRef Name="id" />
@@ -60,8 +60,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="subject_name" Type="varchar" MaxLength="32" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SubjectToTutors">
           <Key>
             <PropertyRef Name="subject_id" />
@@ -69,16 +67,6 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
           </Key>
           <Property Name="subject_id" Type="int" Nullable="false" />
           <Property Name="tutor_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Tutors">
           <Key>
@@ -91,6 +79,20 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
           <Property Name="username" Type="varchar" MaxLength="64" />
           <Property Name="password" Type="varchar" MaxLength="64" />
           <Property Name="faculty_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Uczelnia.dbo.View_Marks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="mark_value" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="subject_name" Type="varchar" MaxLength="32" />
+          <Property Name="t_name" Type="varchar" MaxLength="32" />
+          <Property Name="surname" Type="varchar" MaxLength="32" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="64" />
         </EntityType>
         <Association Name="fk_fac_stud">
           <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
@@ -185,13 +187,18 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentToSubject" EntityType="Self.StudentToSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectToTutors" EntityType="Self.SubjectToTutors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tutors" EntityType="Self.Tutors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SubjectToTutors" EntityType="Self.SubjectToTutors" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="View_Marks" EntityType="Self.View_Marks" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [SubjectToTutors].[subject_id] AS [subject_id], 
-    [SubjectToTutors].[tutor_id] AS [tutor_id]
-    FROM [dbo].[SubjectToTutors] AS [SubjectToTutors]</DefiningQuery>
+    [View_Marks].[mark_value] AS [mark_value], 
+    [View_Marks].[subject_name] AS [subject_name], 
+    [View_Marks].[t_name] AS [t_name], 
+    [View_Marks].[surname] AS [surname], 
+    [View_Marks].[student_id] AS [student_id], 
+    [View_Marks].[id] AS [id], 
+    [View_Marks].[username] AS [username]
+    FROM [dbo].[View_Marks] AS [View_Marks]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
             <End Role="Faculties" EntitySet="Faculties" />
@@ -222,8 +229,7 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
             <End Role="SubjectToTutors" EntitySet="SubjectToTutors" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UczelniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -291,16 +297,6 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
           <Property Name="subject_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StudentToSubjects" Relationship="Self.fk_subj" FromRole="Subjects" ToRole="StudentToSubject" />
           <NavigationProperty Name="Tutors" Relationship="Self.SubjectToTutors" FromRole="Subjects" ToRole="Tutors" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Tutor">
           <Key>
@@ -389,7 +385,6 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="StudentToSubjects" EntityType="Self.StudentToSubject" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tutors" EntityType="Self.Tutor" />
           <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
             <End Role="Faculties" EntitySet="Faculties" />
@@ -415,7 +410,20 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="Tutors" EntitySet="Tutors" />
           </AssociationSet>
+          <EntitySet Name="View_Marks" EntityType="UczelniaModel.View_Marks" />
         </EntityContainer>
+        <EntityType Name="View_Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="mark_value" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="subject_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="t_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -482,17 +490,6 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="UczelniaModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tutors">
             <EntityTypeMapping TypeName="UczelniaModel.Tutor">
               <MappingFragment StoreEntitySet="Tutors">
@@ -514,6 +511,19 @@ warning 6002: The table/view 'Uczelnia.dbo.SubjectToTutors' does not have a prim
               <ScalarProperty Name="id" ColumnName="tutor_id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="View_Marks">
+            <EntityTypeMapping TypeName="UczelniaModel.View_Marks">
+              <MappingFragment StoreEntitySet="View_Marks">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="t_name" ColumnName="t_name" />
+                <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+                <ScalarProperty Name="mark_value" ColumnName="mark_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

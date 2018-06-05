@@ -12,12 +12,14 @@ namespace UczelniaWindows
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class View_Marks
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public Nullable<decimal> mark_value { get; set; }
+        public string subject_name { get; set; }
+        public string t_name { get; set; }
+        public string surname { get; set; }
+        public Nullable<int> student_id { get; set; }
+        public int id { get; set; }
+        public string username { get; set; }
     }
 }

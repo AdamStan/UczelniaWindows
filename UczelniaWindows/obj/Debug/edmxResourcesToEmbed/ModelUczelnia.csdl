@@ -65,16 +65,6 @@
     <NavigationProperty Name="StudentToSubjects" Relationship="Self.fk_subj" FromRole="Subjects" ToRole="StudentToSubject" />
     <NavigationProperty Name="Tutors" Relationship="Self.SubjectToTutors" FromRole="Subjects" ToRole="Tutors" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="Tutor">
     <Key>
       <PropertyRef Name="id" />
@@ -162,7 +152,6 @@
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="StudentToSubjects" EntityType="Self.StudentToSubject" />
     <EntitySet Name="Subjects" EntityType="Self.Subject" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Tutors" EntityType="Self.Tutor" />
     <AssociationSet Name="fk_fac_stud" Association="Self.fk_fac_stud">
       <End Role="Faculties" EntitySet="Faculties" />
@@ -188,5 +177,18 @@
       <End Role="Subjects" EntitySet="Subjects" />
       <End Role="Tutors" EntitySet="Tutors" />
     </AssociationSet>
+    <EntitySet Name="View_Marks" EntityType="UczelniaModel.View_Marks" />
   </EntityContainer>
+  <EntityType Name="View_Marks">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="mark_value" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="subject_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="t_name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="student_id" Type="Int32" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

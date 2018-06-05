@@ -31,7 +31,7 @@ namespace UczelniaWindows
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentToSubject> StudentToSubjects { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tutor> Tutors { get; set; }
+        public virtual DbSet<View_Marks> View_Marks { get; set; }
     }
 }

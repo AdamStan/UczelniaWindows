@@ -29,7 +29,8 @@ CREATE TABLE SubjectToTutors(
 );
 ALTER TABLE SubjectToTutors
 	ADD CONSTRAINT fk_sub FOREIGN KEY (subject_id) REFERENCES Subjects(id),
-		CONSTRAINT fk_tut FOREIGN KEY (tutor_id) REFERENCES Tutors(id)
+		CONSTRAINT fk_tut FOREIGN KEY (tutor_id) REFERENCES Tutors(id),
+		CONSTRAINT pk_stt PRIMARY KEY (tutor_id, subject_id)
 	;
 CREATE TABLE StudentToSubject (
 	student_id INTEGER NOT NULL,

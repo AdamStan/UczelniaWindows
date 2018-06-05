@@ -32,19 +32,20 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.UsernameLabel = new System.Windows.Forms.Label();
             this.comboBoxSubjects = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonSearchStudent = new System.Windows.Forms.Button();
+            this.textBoxStudentIndex = new System.Windows.Forms.TextBox();
+            this.labelStudent = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelStudent = new System.Windows.Forms.Label();
-            this.textBoxStudentIndex = new System.Windows.Forms.TextBox();
-            this.buttonSearchStudent = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonSubmit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonModify = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -96,23 +97,6 @@
             this.comboBoxSubjects.TabIndex = 4;
             this.comboBoxSubjects.Text = "(wybierz przedmiot)";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "login:";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(227, 42);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(455, 297);
-            this.dataGridView1.TabIndex = 4;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.buttonSearchStudent);
@@ -122,22 +106,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(194, 56);
             this.panel1.TabIndex = 5;
-            // 
-            // labelStudent
-            // 
-            this.labelStudent.AutoSize = true;
-            this.labelStudent.Location = new System.Drawing.Point(3, 7);
-            this.labelStudent.Name = "labelStudent";
-            this.labelStudent.Size = new System.Drawing.Size(79, 13);
-            this.labelStudent.TabIndex = 0;
-            this.labelStudent.Text = "Index Studenta";
-            // 
-            // textBoxStudentIndex
-            // 
-            this.textBoxStudentIndex.Location = new System.Drawing.Point(91, 4);
-            this.textBoxStudentIndex.Name = "textBoxStudentIndex";
-            this.textBoxStudentIndex.Size = new System.Drawing.Size(100, 20);
-            this.textBoxStudentIndex.TabIndex = 1;
             // 
             // buttonSearchStudent
             // 
@@ -149,34 +117,79 @@
             this.buttonSearchStudent.UseVisualStyleBackColor = true;
             this.buttonSearchStudent.Click += new System.EventHandler(this.searchStudent);
             // 
+            // textBoxStudentIndex
+            // 
+            this.textBoxStudentIndex.Location = new System.Drawing.Point(91, 4);
+            this.textBoxStudentIndex.Name = "textBoxStudentIndex";
+            this.textBoxStudentIndex.Size = new System.Drawing.Size(100, 20);
+            this.textBoxStudentIndex.TabIndex = 1;
+            // 
+            // labelStudent
+            // 
+            this.labelStudent.AutoSize = true;
+            this.labelStudent.Location = new System.Drawing.Point(3, 7);
+            this.labelStudent.Name = "labelStudent";
+            this.labelStudent.Size = new System.Drawing.Size(79, 13);
+            this.labelStudent.TabIndex = 0;
+            this.labelStudent.Text = "Index Studenta";
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.buttonModify);
             this.panel2.Controls.Add(this.buttonDelete);
-            this.panel2.Controls.Add(this.buttonSubmit);
+            this.panel2.Controls.Add(this.buttonAdd);
             this.panel2.Location = new System.Drawing.Point(3, 171);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(194, 60);
             this.panel2.TabIndex = 6;
             // 
-            // buttonSubmit
+            // buttonAdd
             // 
-            this.buttonSubmit.Location = new System.Drawing.Point(0, 4);
-            this.buttonSubmit.Name = "buttonSubmit";
-            this.buttonSubmit.Size = new System.Drawing.Size(191, 23);
-            this.buttonSubmit.TabIndex = 0;
-            this.buttonSubmit.Text = "Zatwierdź zmiany";
-            this.buttonSubmit.UseVisualStyleBackColor = true;
-            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
+            this.buttonAdd.Location = new System.Drawing.Point(0, 4);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(191, 21);
+            this.buttonAdd.TabIndex = 0;
+            this.buttonAdd.Text = "Dodaj Ocene";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "login:";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(227, 42);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(455, 297);
+            this.dataGridView1.TabIndex = 4;
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(0, 34);
+            this.buttonDelete.Location = new System.Drawing.Point(3, 31);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(191, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 1;
-            this.buttonDelete.Text = "Usuń";
+            this.buttonDelete.Text = "Usun ocene";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonModify
+            // 
+            this.buttonModify.Location = new System.Drawing.Point(104, 31);
+            this.buttonModify.Name = "buttonModify";
+            this.buttonModify.Size = new System.Drawing.Size(75, 23);
+            this.buttonModify.TabIndex = 2;
+            this.buttonModify.Text = "Modyfikuj Ocene";
+            this.buttonModify.UseVisualStyleBackColor = true;
             // 
             // TutorWindow
             // 
@@ -192,10 +205,10 @@
             this.Load += new System.EventHandler(this.TutorWindow_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,7 +227,8 @@
         private System.Windows.Forms.TextBox textBoxStudentIndex;
         private System.Windows.Forms.Label labelStudent;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonSubmit;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonModify;
         private System.Windows.Forms.Button buttonDelete;
     }
 }

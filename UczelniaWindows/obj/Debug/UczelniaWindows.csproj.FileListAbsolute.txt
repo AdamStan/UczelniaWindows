@@ -21,7 +21,6 @@ B:\Projects\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.dll
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.SqlServer.dll
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.xml
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\bin\Debug\EntityFramework.SqlServer.xml
-B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csprojAssemblyReference.cache
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.AdminWindow.resources
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.LoginWindow.resources
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.Properties.Resources.resources
@@ -32,3 +31,4 @@ B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csproj.
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csproj.CopyComplete
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.exe
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.pdb
+B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csprojAssemblyReference.cache

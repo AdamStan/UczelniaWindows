@@ -13,10 +13,9 @@ FROM dbo.Faculties INNER JOIN
 dbo.Tutors ON dbo.Faculties.id = dbo.Tutors.faculty_id
 GO
 
-CREATE VIEW MarksView AS
-SELECT dbo.Students.index_number, dbo.Subjects.subject_name, dbo.Marks.mark_value
-FROM dbo.Marks INNER JOIN
-dbo.Students ON dbo.Marks.student_id = dbo.Students.index_number INNER JOIN
-dbo.StudentToSubject ON dbo.Students.index_number = dbo.StudentToSubject.student_id INNER JOIN
-dbo.Subjects ON dbo.Marks.subject_id = dbo.Subjects.id 
-AND dbo.StudentToSubject.subject_id = dbo.Subjects.id
+CREATE VIEW View_Marks AS
+SELECT        dbo.Marks.mark_value, dbo.Subjects.subject_name, dbo.Tutors.t_name, dbo.Tutors.surname, dbo.Marks.student_id, dbo.Marks.id, dbo.Tutors.username
+FROM            dbo.Marks INNER JOIN
+                         dbo.Subjects ON dbo.Marks.id = dbo.Subjects.id LEFT OUTER JOIN
+                         dbo.SubjectToTutors ON dbo.Subjects.id = dbo.SubjectToTutors.subject_id LEFT OUTER JOIN
+                         dbo.Tutors ON dbo.SubjectToTutors.tutor_id = dbo.Tutors.id

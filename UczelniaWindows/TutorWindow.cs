@@ -46,8 +46,8 @@ namespace UczelniaWindows
                 "INNER JOIN dbo.SubjectToTutors stt ON " +
                 "sub.id = stt.subject_id " +
                 "INNER JOIN dbo.Tutors ON " +
-                " dbo.Tutors.id = stt.tutor_id" +
-                " where dbo.Tutors.username = " + this.UsernameLabel.Text;
+                "dbo.Tutors.id = stt.tutor_id " +
+                "where dbo.Tutors.username = '" + this.UsernameLabel.Text + "'";
             SqlDataAdapter sda1 = new SqlDataAdapter(commandSubjects, connect);
             DataTable dt = new DataTable();
             sda1.Fill(dt);
@@ -57,34 +57,52 @@ namespace UczelniaWindows
             }
             connect.Close();
             //uzupelnic datagrid jego ocenami + przedmiotami
-            /* TO BEDZIE MAŁY DŻOJN
-            SELECT dbo.Students.index_number, dbo.Marks.mark_value, dbo.Subjects.subject_name, dbo.SubjectToTutors.tutor_id
-            FROM dbo.Marks 
-            INNER JOIN dbo.StudentToSubject 
-            ON dbo.Marks.student_id = dbo.StudentToSubject.student_id AND dbo.Marks.subject_id = dbo.StudentToSubject.subject_id 
-            INNER JOIN dbo.Students 
-            ON dbo.StudentToSubject.student_id = dbo.Students.index_number 
-            INNER JOIN dbo.SubjectToTutors 
-            ON dbo.StudentToSubject.subject_id = dbo.SubjectToTutors.subject_id 
-            INNER JOIN dbo.Subjects 
-            ON dbo.StudentToSubject.subject_id = dbo.Subjects.id AND dbo.SubjectToTutors.subject_id = dbo.Subjects.id
-            */
-            //(nullowe wartosci tym bardziej wyswietlic left join lub right)
+
+            /*connect.Open();
+            string commandMarks = "select m.mark_value[wartosc], " +
+                "m.student_id[index number], sub.subject_name[subject's name], " +
+                "concat(t.t_name, ' ', t.surname)[tutor], m.id[mark's id] " +
+                "from Marks m inner join Subjects sub on sub.id = m.subject_id " +
+                "left join SubjectToTutors stt on sub.id = stt.subject_id " +
+                "left join Tutors t on t.id = stt.tutor_id " +
+                "where t.username = '" + this.UsernameLabel.Text + "'";
+            SqlDataAdapter sda2 = new SqlDataAdapter(commandMarks, connect);
+            DataTable dt_marks = new DataTable();
+            sda2.Fill(dt_marks);
+            dataGridView1.DataSource = dt_marks;
+            connect.Close();*/
+            UczelniaEntities db = new UczelniaEntities();
+            var query = from vm in db.View_Marks
+                        where vm.username == this.UsernameLabel.Text
+                        select new { vm.subject_name,
+                            vm.student_id,
+                            vm.mark_value
+                        };
+            
+            var dataTable = query.ToList();
+
+            dataGridView1.DataSource = dataTable;
+            //(nullowe wartosci tym bardziej wyswietlic left join lub riht)
         }
 
         private void searchStudent(object sender, EventArgs e)
         {
+            UczelniaEntities db = new UczelniaEntities();
+            int buff = Convert.ToInt32(this.textBoxStudentIndex.Text);
 
-        }
+            var query = from vm in db.View_Marks
+                        where vm.username == this.UsernameLabel.Text && 
+                        vm.student_id == buff
+                        select new
+                        {
+                            vm.subject_name,
+                            vm.student_id,
+                            vm.mark_value
+                        };
 
-        private void buttonSubmit_Click(object sender, EventArgs e)
-        {
+            var dataTable = query.ToList();
 
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-
+            dataGridView1.DataSource = dataTable;
         }
     }
 }
