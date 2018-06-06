@@ -37,11 +37,10 @@
             this.textBoxStudentIndex = new System.Windows.Forms.TextBox();
             this.labelStudent = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonModify = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonModify = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -50,7 +49,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 237);
+            this.button1.Location = new System.Drawing.Point(3, 250);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(191, 23);
             this.button1.TabIndex = 0;
@@ -68,15 +67,15 @@
             this.tableLayoutPanel1.Controls.Add(this.comboBoxSubjects, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 55);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 42);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.91304F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.08696F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 284);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 297);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // UsernameLabel
@@ -91,9 +90,9 @@
             // comboBoxSubjects
             // 
             this.comboBoxSubjects.FormattingEnabled = true;
-            this.comboBoxSubjects.Location = new System.Drawing.Point(3, 49);
+            this.comboBoxSubjects.Location = new System.Drawing.Point(3, 36);
             this.comboBoxSubjects.Name = "comboBoxSubjects";
-            this.comboBoxSubjects.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSubjects.Size = new System.Drawing.Size(194, 21);
             this.comboBoxSubjects.TabIndex = 4;
             this.comboBoxSubjects.Text = "(wybierz przedmiot)";
             // 
@@ -102,7 +101,7 @@
             this.panel1.Controls.Add(this.buttonSearchStudent);
             this.panel1.Controls.Add(this.textBoxStudentIndex);
             this.panel1.Controls.Add(this.labelStudent);
-            this.panel1.Location = new System.Drawing.Point(3, 109);
+            this.panel1.Location = new System.Drawing.Point(3, 79);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(194, 56);
             this.panel1.TabIndex = 5;
@@ -136,26 +135,36 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.buttonModify);
-            this.panel2.Controls.Add(this.buttonDelete);
             this.panel2.Controls.Add(this.buttonAdd);
-            this.panel2.Location = new System.Drawing.Point(3, 171);
+            this.panel2.Location = new System.Drawing.Point(3, 150);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(194, 60);
+            this.panel2.Size = new System.Drawing.Size(194, 89);
             this.panel2.TabIndex = 6;
+            // 
+            // buttonModify
+            // 
+            this.buttonModify.Location = new System.Drawing.Point(41, 31);
+            this.buttonModify.Name = "buttonModify";
+            this.buttonModify.Size = new System.Drawing.Size(107, 23);
+            this.buttonModify.TabIndex = 2;
+            this.buttonModify.Text = "Modyfikuj Ocene";
+            this.buttonModify.UseVisualStyleBackColor = true;
+            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(0, 4);
+            this.buttonAdd.Location = new System.Drawing.Point(41, 4);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(191, 21);
+            this.buttonAdd.Size = new System.Drawing.Size(107, 21);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Dodaj Ocene";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 39);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 3;
@@ -172,24 +181,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(455, 297);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(3, 31);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 1;
-            this.buttonDelete.Text = "Usun ocene";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonModify
-            // 
-            this.buttonModify.Location = new System.Drawing.Point(104, 31);
-            this.buttonModify.Name = "buttonModify";
-            this.buttonModify.Size = new System.Drawing.Size(75, 23);
-            this.buttonModify.TabIndex = 2;
-            this.buttonModify.Text = "Modyfikuj Ocene";
-            this.buttonModify.UseVisualStyleBackColor = true;
             // 
             // TutorWindow
             // 
@@ -229,6 +220,5 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonModify;
-        private System.Windows.Forms.Button buttonDelete;
     }
 }

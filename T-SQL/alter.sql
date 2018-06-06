@@ -48,4 +48,5 @@ ALTER TABLE Marks
 		student_id INTEGER,
 		subject_id INTEGER,
 		CONSTRAINT fk_std_sub_mk FOREIGN KEY (student_id,subject_id) REFERENCES StudentToSubject(student_id,subject_id)
+		CONSTRAINT unique_couple UNIQUE (student_id, subject_id)
 	;

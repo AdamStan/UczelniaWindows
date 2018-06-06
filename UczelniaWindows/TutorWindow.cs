@@ -19,7 +19,8 @@ namespace UczelniaWindows
         public TutorWindow(Form behind, string name)
         {
             InitializeComponent();
-            this.tutorConnection = new Connection("Data Source=DESKTOP-8G4C4MF;" +
+            string serverName = UczelniaWindows.Properties.Resources.NazwaServera;
+            this.tutorConnection = new Connection("Data Source=" + serverName + ";" +
                 "Initial Catalog=Uczelnia;User ID=tutor;Password=tutor123");
             this.formBehind = behind;
             this.UsernameLabel.Text = name;
@@ -103,6 +104,18 @@ namespace UczelniaWindows
             var dataTable = query.ToList();
 
             dataGridView1.DataSource = dataTable;
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new FormAddMark(this, this.UsernameLabel.Text).Show();
+        }
+
+        private void buttonModify_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new FormModifyMark(this, this.UsernameLabel.Text).Show();
         }
     }
 }
