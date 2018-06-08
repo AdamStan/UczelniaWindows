@@ -29,21 +29,29 @@ namespace UczelniaWindows
 
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
-            SqlConnection con = this.tcon.con;
-            con.Open();
-            string getSubjectId = "select id from subjects where subject_name = '" + comboBoxSubject.Text + "'";
-            SqlCommand cmd = new SqlCommand(getSubjectId, con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            string subject_id = reader[0].ToString();
-            reader.Close();
-            string insert = "insert into Marks values (" 
-                + textBoxMark.Text + ", " + comboBoxIndex.Text + ", " 
-                + subject_id + ")";
-            new SqlCommand(insert, con).ExecuteNonQuery();
-            con.Close();
-            this.behind.Show();
-            this.Close();
+            try
+            {
+                SqlConnection con = this.tcon.con;
+                con.Open();
+                string getSubjectId = "select id from subjects where subject_name = '" + comboBoxSubject.Text + "'";
+                SqlCommand cmd = new SqlCommand(getSubjectId, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                string subject_id = reader[0].ToString();
+                reader.Close();
+                string insert = "insert into Marks values ("
+                    + textBoxMark.Text + ", " + comboBoxIndex.Text + ", "
+                    + subject_id + ")";
+                new SqlCommand(insert, con).ExecuteNonQuery();
+                con.Close();
+                this.behind.Show();
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

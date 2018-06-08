@@ -55,7 +55,7 @@ namespace UczelniaWindows
                 }
                 else if (comboBox1.Text == "subjects")
                 {
-                    dataGridView1.DataSource = context.Students.ToList();
+                    dataGridView1.DataSource = context.Subjects.ToList();
                 }
                 else if (comboBox1.Text == "faculties")
                 {
@@ -71,6 +71,11 @@ namespace UczelniaWindows
         private void Confirm(object sender, EventArgs e)
         {
             context.SaveChanges();
+        }
+
+        private void AdminWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.formBehind.Show();
         }
     }
 }

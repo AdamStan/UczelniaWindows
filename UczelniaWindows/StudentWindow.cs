@@ -19,8 +19,9 @@ namespace UczelniaWindows
         public StudentWindow(Form behind, int i)
         {
             InitializeComponent();
-            this.studentConnection = new Connection("Data Source=DESKTOP-8G4C4MF;" +
-                "Initial Catalog=Uczelnia;User ID=student;Password=student123");
+            this.studentConnection = new Connection("Data Source=" 
+                + Properties.Resources.NazwaServera + ";" 
+                + "Initial Catalog=Uczelnia;User ID=student;Password=student123");
             this.formBehind = behind;
             this.UsernameLabel.Text = i.ToString();
         }

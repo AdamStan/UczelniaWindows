@@ -30,7 +30,8 @@ namespace UczelniaWindows
             UsernameTextBox.Text = "";
             PasswordTextBox.Text = "";
 
-            Connection c = new Connection("Data Source=DESKTOP-8G4C4MF;" +
+            Connection c = new Connection("Data Source=" + 
+                Properties.Resources.NazwaServera + ";" +
                 "Initial Catalog=Uczelnia;Integrated Security=True");
 
             if (comboBox1.Text.Equals("student"))

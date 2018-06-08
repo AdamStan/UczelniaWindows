@@ -102,6 +102,7 @@
             this.Controls.Add(this.buttonLogout);
             this.Name = "AdminWindow";
             this.Text = "AdminWindow";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminWindow_FormClosing);
             this.Load += new System.EventHandler(this.AdminWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

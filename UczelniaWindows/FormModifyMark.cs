@@ -29,24 +29,31 @@ namespace UczelniaWindows
 
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
-            SqlConnection con = this.tcon.con;
-            con.Open();
-            string getSubjectId = "select id from subjects where subject_name = '" + comboBoxSubject.Text + "'";
-            SqlCommand cmd = new SqlCommand(getSubjectId, con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            string subject_id = reader[0].ToString();
-            reader.Close();
+            try
+            {
+                SqlConnection con = this.tcon.con;
+                con.Open();
+                string getSubjectId = "select id from subjects where subject_name = '" + comboBoxSubject.Text + "'";
+                SqlCommand cmd = new SqlCommand(getSubjectId, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                string subject_id = reader[0].ToString();
+                reader.Close();
 
-            string update = "update Marks set mark_value = " + textBoxMark.Text 
-                + " where student_id = " + comboBoxIndex.Text 
-                + " AND subject_id = " + subject_id;
-            SqlCommand command = new SqlCommand(update, con);
-            command.ExecuteNonQuery();
-            con.Close();
+                string update = "update Marks set mark_value = " + textBoxMark.Text
+                    + " where student_id = " + comboBoxIndex.Text
+                    + " AND subject_id = " + subject_id;
+                SqlCommand command = new SqlCommand(update, con);
+                command.ExecuteNonQuery();
+                con.Close();
 
-            this.behind.Show();
-            this.Close();
+                this.behind.Show();
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
