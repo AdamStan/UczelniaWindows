@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,8 @@ namespace UczelniaWindows
                 }
                 else if (comboBox1.Text == "administrators")
                 {
-                    dataGridView1.DataSource = context.Administrators.ToList();
+                    administratorBindingSource.DataSource = context.Administrators.ToList();
+                    dataGridView1.DataSource = administratorBindingSource;
                 }
                 else if (comboBox1.Text == "students")
                 {
@@ -70,11 +72,24 @@ namespace UczelniaWindows
         }
         private void Confirm(object sender, EventArgs e)
         {
-            context.SaveChanges();
+            try
+            {
+            //BindingSource bs = (BindingSource)dataGridView1.DataSource; // Se convierte el DataSource 
+                context.SaveChanges();
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show("Wybierz tabele");
+            }
+            catch(DbEntityValidationException ex)
+            {
+                MessageBox.Show("Zle edytowane dane");
+            }
         }
 
         private void AdminWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            context.Dispose();
             this.formBehind.Show();
         }
     }

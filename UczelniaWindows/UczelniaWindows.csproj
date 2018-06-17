@@ -183,6 +183,14 @@
       <DependentUpon>ModelUczelnia.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Administrator.datasource" />
+    <None Include="Properties\DataSources\Faculty.datasource" />
+    <None Include="Properties\DataSources\Mark.datasource" />
+    <None Include="Properties\DataSources\Student.datasource" />
+    <None Include="Properties\DataSources\StudentToSubject.datasource" />
+    <None Include="Properties\DataSources\Subject.datasource" />
+    <None Include="Properties\DataSources\Tutor.datasource" />
+    <None Include="Properties\DataSources\View_Marks.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
