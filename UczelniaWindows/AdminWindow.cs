@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
@@ -44,8 +45,7 @@ namespace UczelniaWindows
                 }
                 else if (comboBox1.Text == "administrators")
                 {
-                    administratorBindingSource.DataSource = context.Administrators.ToList();
-                    dataGridView1.DataSource = administratorBindingSource;
+                    dataGridView1.DataSource = context.Administrators.ToList();
                 }
                 else if (comboBox1.Text == "students")
                 {
@@ -74,7 +74,6 @@ namespace UczelniaWindows
         {
             try
             {
-            //BindingSource bs = (BindingSource)dataGridView1.DataSource; // Se convierte el DataSource 
                 context.SaveChanges();
             }
             catch(NullReferenceException ex)
@@ -85,12 +84,85 @@ namespace UczelniaWindows
             {
                 MessageBox.Show("Zle edytowane dane");
             }
+            catch(DbUpdateException ex)
+            {
+                MessageBox.Show("Nie mozna wykonac update'a");
+            }
         }
 
         private void AdminWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             context.Dispose();
             this.formBehind.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "(wybierz tabele)")
+            {
+                MessageBox.Show("Nie wybrano tabeli");
+            }
+            else
+            {
+                if (comboBox1.Text == "administrators")
+                {
+                    Administrator administrator = 
+                        new Administrator {
+                            password = "12345",
+                            username = "Ad_new"
+                        };
+                    context.Administrators.Add(administrator);
+                    context.SaveChanges();
+                    dataGridView1.DataSource = context.Administrators.ToList();
+                }
+                else if (comboBox1.Text == "tutors")
+                {
+                    Tutor tutor = new Tutor { username = "tutor_new", password = "12345" };
+                    context.Tutors.Add(tutor);
+                    context.SaveChanges();
+                    dataGridView1.DataSource = context.Tutors.ToList();
+                }
+                
+                else if (comboBox1.Text == "students")
+                {
+                    Student student = new Student
+                    {
+                        password = "12345678",
+                        s_name = "(wpisz imie)",
+                        surname = "(wpisz nazwisko)",
+                        field_of_study = "1",
+                        degree = "inz",
+                        mode = "dzienne",
+                        semester = 1
+                    };
+                    context.Students.Add(student);
+                    context.SaveChanges();
+                    dataGridView1.DataSource = context.Students.ToList();
+                }
+                else if (comboBox1.Text == "marks")
+                {
+                    Mark mark = new Mark();
+                    context.Marks.Add(mark);
+                    context.SaveChanges();
+                    dataGridView1.DataSource = context.Marks.ToList();
+                }
+                else if (comboBox1.Text == "subjects")
+                {
+                    Subject subject = new Subject { subject_name = "(wpisz nazwe)" };
+                    context.Subjects.Add(subject);
+                    context.SaveChanges();
+                    dataGridView1.DataSource = context.Subjects.ToList();
+                }
+                else if (comboBox1.Text == "faculties")
+                {
+                    Faculty faculty = new Faculty { faculty_name = "(zmien nazwe)"};
+                    context.Faculties.Add(faculty);
+                    context.SaveChanges();
+                    dataGridView1.DataSource = context.Faculties.ToList();
+                }
+            }
+            dataGridView1.Refresh();
+            //context.SaveChanges();
         }
     }
 }
