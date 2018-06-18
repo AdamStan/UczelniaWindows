@@ -32,13 +32,9 @@ namespace UczelniaWindows
 
         private void LoadTableToGrid(object sender, EventArgs e)
         {
-            button1.Text = "Dodaj";
-            if (comboBox1.Text == "(wybierz tabele)")
+            try
             {
-                MessageBox.Show("Nie wybrano tabeli");
-            }
-            else
-            {
+                button1.Text = "Dodaj";
                 context = new UczelniaEntities();
                 if (comboBox1.Text == "tutors")
                 {
@@ -69,6 +65,10 @@ namespace UczelniaWindows
                     button1.Text = "Dodaj Stud<->Subject";
                     dataGridView1.DataSource = context.StudentToSubjects.ToList();
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -104,7 +104,7 @@ namespace UczelniaWindows
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "(wybierz tabele)")
+            if (comboBox1.Text == "")
             {
                 MessageBox.Show("Nie wybrano tabeli");
             }
@@ -184,6 +184,110 @@ namespace UczelniaWindows
             }
             dataGridView1.Refresh();
             //context.SaveChanges();
+        }
+        // przyznaje sie, to akurat znalazlem na stacku
+        // https://stackoverflow.com/questions/30018282/how-can-i-delete-object-with-dbcontext-in-c
+        private void deleteSelectedRow(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBox1.Text == "")
+                {
+                    MessageBox.Show("Nie wybrano tabeli");
+                }
+                else
+                {
+                    if (comboBox1.Text == "administrators")
+                    {
+                        var selectedOrderLine = (Administrator)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.Administrators.SingleOrDefault(item => item.id == selectedOrderLine.id);
+                        if (orderLine != null)
+                        {
+                            context.Administrators.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.Administrators.ToList();
+                        }
+                    }
+                    else if (comboBox1.Text == "tutors")
+                    {
+                        var selectedOrderLine = (Tutor)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.Tutors.SingleOrDefault(item => item.id == selectedOrderLine.id);
+                        if (orderLine != null)
+                        {
+                            context.Tutors.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.Tutors.ToList();
+                        }
+                    }
+
+                    else if (comboBox1.Text == "students")
+                    {
+                        var selectedOrderLine = (Student)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.Students.SingleOrDefault(item =>
+                                item.index_number == selectedOrderLine.index_number);
+                        if (orderLine != null)
+                        {
+                            context.Students.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.Students.ToList();
+                        }
+                    }
+                    else if (comboBox1.Text == "marks")
+                    {
+                        var selectedOrderLine = (Mark)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.Marks.SingleOrDefault(item =>
+                                item.id == selectedOrderLine.id);
+                        if (orderLine != null)
+                        {
+                            context.Marks.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.Marks.ToList();
+                        }
+                    }
+                    else if (comboBox1.Text == "subjects")
+                    {
+                        var selectedOrderLine = (Subject)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.Subjects.SingleOrDefault(item =>
+                                item.id == selectedOrderLine.id);
+                        if (orderLine != null)
+                        {
+                            context.Subjects.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.Subjects.ToList();
+                        }
+                    }
+                    else if (comboBox1.Text == "faculties")
+                    {
+                        var selectedOrderLine = (Faculty)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.Faculties.SingleOrDefault(item =>
+                                item.id == selectedOrderLine.id);
+                        if (orderLine != null)
+                        {
+                            context.Faculties.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.Faculties.ToList();
+                        }
+                    }
+                    else if (comboBox1.Text == "studenttosubjects")
+                    {
+                        var selectedOrderLine = (StudentToSubject)dataGridView1.SelectedRows[0].DataBoundItem;
+                        var orderLine = context.StudentToSubjects.SingleOrDefault(item =>
+                                (item.student_id == selectedOrderLine.student_id)
+                                && (item.subject_id == selectedOrderLine.subject_id));
+                        if (orderLine != null)
+                        {
+                            context.StudentToSubjects.Remove(orderLine);
+                            context.SaveChanges();
+                            dataGridView1.DataSource = context.StudentToSubjects.ToList();
+                        }
+                    }
+                }
+                dataGridView1.Refresh();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Pewnie ten exeption nic ci nie powie: " + ex.Message);
+            }
         }
     }
 }

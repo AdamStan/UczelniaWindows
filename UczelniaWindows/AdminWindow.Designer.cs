@@ -33,14 +33,15 @@
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogout
             // 
-            this.buttonLogout.Location = new System.Drawing.Point(624, 21);
+            this.buttonLogout.Location = new System.Drawing.Point(624, 12);
             this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(90, 25);
+            this.buttonLogout.Size = new System.Drawing.Size(90, 47);
             this.buttonLogout.TabIndex = 0;
             this.buttonLogout.Text = "Wyloguj";
             this.buttonLogout.UseVisualStyleBackColor = true;
@@ -48,6 +49,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "administrators",
@@ -61,7 +63,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(138, 21);
             this.comboBox1.TabIndex = 2;
-            this.comboBox1.Text = "(wybierz tabele)";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.LoadTableToGrid);
             // 
             // ConfirmButton
@@ -93,11 +94,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(388, 23);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(83, 23);
+            this.buttonDelete.TabIndex = 7;
+            this.buttonDelete.Text = "Usuń wybrany";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.deleteSelectedRow);
+            // 
             // AdminWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(726, 336);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ConfirmButton);
@@ -119,5 +131,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
