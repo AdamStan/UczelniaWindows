@@ -34,3 +34,4 @@ B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.pdb
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.csprojAssemblyReference.cache
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.FormAddMark.resources
 B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.FormModifyMark.resources
+B:\Projects\C#\UczelniaWindows\UczelniaWindows\obj\Debug\UczelniaWindows.AddStudentToSubjectForm.resources

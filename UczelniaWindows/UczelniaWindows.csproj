@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddStudentToSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddStudentToSubjectForm.Designer.cs">
+      <DependentUpon>AddStudentToSubjectForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administrator.cs">
       <DependentUpon>ModelUczelnia.tt</DependentUpon>
     </Compile>
@@ -147,6 +153,9 @@
     <Compile Include="View_Marks.cs">
       <DependentUpon>ModelUczelnia.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddStudentToSubjectForm.resx">
+      <DependentUpon>AddStudentToSubjectForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminWindow.resx">
       <DependentUpon>AdminWindow.cs</DependentUpon>
     </EmbeddedResource>

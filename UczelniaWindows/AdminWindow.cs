@@ -32,6 +32,7 @@ namespace UczelniaWindows
 
         private void LoadTableToGrid(object sender, EventArgs e)
         {
+            button1.Text = "Dodaj";
             if (comboBox1.Text == "(wybierz tabele)")
             {
                 MessageBox.Show("Nie wybrano tabeli");
@@ -62,6 +63,11 @@ namespace UczelniaWindows
                 else if (comboBox1.Text == "faculties")
                 {
                     dataGridView1.DataSource = context.Faculties.ToList();
+                }
+                else if (comboBox1.Text == "studenttosubjects")
+                {
+                    button1.Text = "Dodaj Stud<->Subject";
+                    dataGridView1.DataSource = context.StudentToSubjects.ToList();
                 }
             }
         }
@@ -159,6 +165,21 @@ namespace UczelniaWindows
                     context.Faculties.Add(faculty);
                     context.SaveChanges();
                     dataGridView1.DataSource = context.Faculties.ToList();
+                }
+                else if (comboBox1.Text == "studenttosubjects")
+                {
+                    new AddStudentToSubjectForm().ShowDialog();
+                    StudentToSubject studentToSubject = AddStudentToSubjectForm.sts;
+                    if(studentToSubject == null)
+                    {
+                        MessageBox.Show("Podano zle wartosci");
+                    }
+                    else
+                    {
+                        context.StudentToSubjects.Add(studentToSubject);
+                        context.SaveChanges();
+                        dataGridView1.DataSource = context.StudentToSubjects.ToList();
+                    }
                 }
             }
             dataGridView1.Refresh();
